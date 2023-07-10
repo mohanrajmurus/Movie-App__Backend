@@ -12,6 +12,6 @@ app.use(cors())
 
 app.use('/',router)
 app.listen(PORT,(err)=>{
-    if(err) console.error(err);
+    if(err) console.error(err); 
     else console.log(`Server Listening on PORT:${PORT}`);
 })
