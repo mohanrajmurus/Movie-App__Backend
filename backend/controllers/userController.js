@@ -41,6 +41,9 @@ const loginUser = async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
+        token: jwt.sign(user.email, process.env.JWT__SECRET, {
+          expiresIn: "30d",
+        }),
       })
     } else {
       return res.status(400).send("Invalid Password")
