@@ -41,9 +41,7 @@ const loginUser = async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
-        token: jwt.sign(user.email, process.env.JWT__SECRET, {
-          expiresIn: "30d",
-        }),
+        token: generateJWTToken(user.email),
       })
     } else {
       return res.status(400).send("Invalid Password")
@@ -51,6 +49,12 @@ const loginUser = async (req, res) => {
   } else {
     return res.status(400).send("User not registred with us")
   }
+}
+
+const generateJWTToken = (email) => {
+  return jwt.sign({ email }, process.env.JWT__SECRET, {
+    expiresIn: "5h",
+  })
 }
 
 module.exports = { registerUser, loginUser }
