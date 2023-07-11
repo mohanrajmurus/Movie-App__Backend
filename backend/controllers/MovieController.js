@@ -45,5 +45,13 @@ const getMovieById = async (req, res) => {
     console.error(error);
   }
 };
-
-module.exports = { createMovieDetails, getAllMovieDetails, getMovieById };
+const deleteMovieById = async(req,res) =>{
+  try {
+    const {id} = req.params;
+    const del = await movieModel.findByIdAndDelete(id)
+    res.status(200).json(del)
+  } catch (error) {
+    
+  }
+}
+module.exports = { createMovieDetails, getAllMovieDetails, getMovieById,deleteMovieById };

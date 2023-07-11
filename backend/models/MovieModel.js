@@ -7,7 +7,9 @@ const movieSchema = new Schema({
   thumbnail: { type: String, default: null },
   imageURL: { type: String, default: null },
   videoURL: { type: String, default: null },
-});
+},
+{timestamps:true}
+);
 
 const movieModel = mongoose.model("movieModel", movieSchema);
 
