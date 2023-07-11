@@ -9,7 +9,7 @@ const userModel = new Schema({
     unique: true,
   },
   password: { type: String, require: [true, "Please enter a password"] },
-})
+},{timestamps:true})
 
 const User = mongoose.model("User", userModel)
 
