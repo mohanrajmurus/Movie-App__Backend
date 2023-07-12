@@ -4,6 +4,7 @@ const {
   getMovieById,
   deleteMovieById,
 } = require("../controllers/MovieController")
+const auth = require('../middleware/auth')
 const express = require("express")
 const {
   generateImageURL,
@@ -14,7 +15,7 @@ const router = express.Router()
 
 router.post("/addmovie", createMovieDetails)
 router.get("/allmovies", getAllMovieDetails)
-router.get("/movie/:id", getMovieById)
+router.get("/movie/:id",auth, getMovieById)
 router.post("/imgurl", generateImageURL)
 router.post("/videourl", generateVideoURL)
 router.delete("/movie/:id", deleteMovieById)
