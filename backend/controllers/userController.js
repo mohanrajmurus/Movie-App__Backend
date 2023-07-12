@@ -53,7 +53,7 @@ const loginUser = async (req, res) => {
 
 const generateJWTToken = (email) => {
   return jwt.sign({ email }, process.env.JWT__SECRET, {
-    expiresIn: "5h",
+    expiresIn: "30d",
   })
 }
 
