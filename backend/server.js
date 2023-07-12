@@ -11,7 +11,7 @@ app.use(cors())
 
 app.use("/", require('./routes/movieRoutes'))
 app.use('/user',require('./routes/userRoutes'))
-app.listen(PORT, (err) => {
+app.listen((PORT|| 40001), (err) => {
   if (err) console.error(err)
   else console.log(`Server Listening on PORT:${PORT}`)
 })
