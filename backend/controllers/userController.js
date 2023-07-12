@@ -42,6 +42,7 @@ const loginUser = async (req, res) => {
         name: user.name,
         email: user.email,
         token: generateJWTToken(user.email),
+        isAdmin:user.isAdmin
       })
     } else {
       return res.status(400).send("Invalid Password")

@@ -13,7 +13,7 @@ const {
 
 const router = express.Router()
 
-router.post("/addmovie", createMovieDetails)
+router.post("/addmovie",auth, createMovieDetails)
 router.get("/allmovies", getAllMovieDetails)
 router.get("/movie/:id",auth, getMovieById)
 router.post("/imgurl", generateImageURL)

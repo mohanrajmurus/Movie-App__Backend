@@ -22,6 +22,7 @@ const createMovieDetails = async (req, res) => {
       thumbnail,
       imageURL,
       videoURL,
+      user:req.user._id
     })
     res.status(201).json(movieDetails)
   } catch (error) {
