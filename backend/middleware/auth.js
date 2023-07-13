@@ -9,8 +9,8 @@ const auth = async (req, res, next) => {
     ) {
       const token = req.headers.authorization.split(" ")[1]
 
-      const decode = jwt.verify(token, process.env.JWT__SECRET)
-      const { email } = decode
+      const {email} = jwt.verify(token, process.env.JWT__SECRET)
+      
       req.user = await User.findOne({ email })
 
       next()
