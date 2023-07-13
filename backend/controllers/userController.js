@@ -51,6 +51,32 @@ const loginUser = async (req, res) => {
     return res.status(400).send("User not registred with us")
   }
 }
+const findUser = async(req,res) => {
+  const {id} = req.params
+  try {
+    console.log(id);
+    const user = await User.findOne({email:id})
+    if(user) {
+      return res.status(200).json({
+        id:user._id
+      })
+    }
+    else return res.status(400).send('Email not registred with us. Please Create Account')
+  } catch (error) {
+    return res.status(400).send(error)
+  }
+}
+const resetPassword = async(req,res) => {
+  try {
+    const {id} = req.params
+    const {password} = req.body
+    const hashPassword = await bcrypt.hash(password,10)
+    const user = await User.findByIdAndUpdate(id,{password:hashPassword})
+    return res.status(200).send('password changed sucessfully')
+  } catch (error) {
+    return res.status(400).send(error)
+  }
+}
 
 const generateJWTToken = (email) => {
   return jwt.sign({ email }, process.env.JWT__SECRET, {
@@ -58,4 +84,4 @@ const generateJWTToken = (email) => {
   })
 }
 
-module.exports = { registerUser, loginUser }
+module.exports = { registerUser, loginUser, findUser,resetPassword }
