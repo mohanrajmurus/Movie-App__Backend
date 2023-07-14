@@ -2,6 +2,7 @@ const User = require("../models/userModel")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 const asyncHandler = require("express-async-handler")
+
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body
   if (!name || !email || !password) {
@@ -26,6 +27,7 @@ const registerUser = asyncHandler(async (req, res) => {
     })
   } else res.status(400).send("Invalid Parameters")
 })
+
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body
   if (!email || !password) {
@@ -65,7 +67,7 @@ const resetPassword = asyncHandler(async (req, res) => {
   const { id } = req.params
   const { password } = req.body
   const hashPassword = await bcrypt.hash(password, 10)
-  const user = await User.findByIdAndUpdate(id, { password: hashPassword })
+  await User.findByIdAndUpdate(id, { password: hashPassword })
   return res.status(200).send("password changed sucessfully")
 })
 
