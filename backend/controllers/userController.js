@@ -5,13 +5,6 @@ const asyncHandler = require("express-async-handler")
 
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body
-  if (!name || !email || !password) {
-    return res.status(400).send("All inputs are required")
-  }
-  const existUser = await User.findOne({ email })
-  if (existUser) {
-    return res.status(401).send("User already exist.")
-  }
   const salt = await bcrypt.genSalt(10)
   const hashPassword = await bcrypt.hash(password, salt)
   const user = await User.create({
@@ -25,9 +18,8 @@ const registerUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
     })
-  } else res.status(400).send("Invalid Parameters")
+  } else return res.status(400).send("Invalid Parameters")
 })
-
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body
   if (!email || !password) {
