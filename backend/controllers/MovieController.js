@@ -2,6 +2,7 @@ const movieModel = require("../models/MovieModel")
 const asyncHandler = require("express-async-handler")
 const createMovieDetails = asyncHandler(async (req, res) => {
   const { title, genre, description, thumbnail, imageURL, videoURL } = req.body
+  
   if (!title || !genre || !description || !thumbnail || !imageURL || !videoURL)
     return res.status(400).send("All inputs are required")
   if (await movieModel.findOne({ title }))
