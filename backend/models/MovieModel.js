@@ -10,6 +10,12 @@ const movieSchema = new Schema(
       unique: true,
       trim: true,
     },
+    castandcrews: {
+      director: { type: String, default: null },
+      music_dir: { type: String, default: null },
+      producer: { type: String, default: null },
+      cast: { type: Array, default: null },
+    },
     genre: {
       type: String,
       default: null,
@@ -37,6 +43,14 @@ const movieSchema = new Schema(
       default: null,
       require: [true, "A movie model has video URL"],
     },
+    reviews: [
+      {
+        user: { type: Schema.Types.ObjectId, require: true, ref: "User" },
+        date: { type: Date, default: new Date() },
+        comments: { type: String, default: null },
+        ratings: { type: Number, default: 5 },
+      },
+    ],
   },
   { timestamps: true }
 )
