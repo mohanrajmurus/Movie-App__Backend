@@ -56,7 +56,7 @@ const movieSchema = new Schema(
     ratings: [
       {
         userrating: { type: Number, default: 5 },
-        user: { type: Schema.Types.ObjectId, require: true, ref: "User" ,unique:true},
+        user: { type: Schema.Types.ObjectId, require: true, ref: "User"},
       },
     ],
   },
