@@ -41,9 +41,9 @@ const deleteMovieById = asyncHandler(async (req, res) => {
 })
 const addMovieRatings = asyncHandler(async (req, res) => {
   const { id } = req.params
-  const { rate } = req.body
+  const { userrating } = req.body
   const movie = await movieModel.findById(id)
-  movie.ratings.push({userrating:rate,user:req.user._id})
+  movie.ratings.push({userrating,user:req.user._id})
   await movie.save()
   res.status(201).send('Rating Posted sucessfully')
 })
