@@ -32,7 +32,7 @@ const loginUser = asyncHandler(async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
-        token: generateJWTToken(user.email),
+        token: generateJWTToken(user._id),
         isAdmin: user.isAdmin,
       })
     } else {
@@ -63,8 +63,8 @@ const resetPassword = asyncHandler(async (req, res) => {
   return res.status(200).send("password changed sucessfully")
 })
 
-const generateJWTToken = (email) => {
-  return jwt.sign({ email }, process.env.JWT__SECRET, {
+const generateJWTToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT__SECRET, {
     expiresIn: "30d",
   })
 }

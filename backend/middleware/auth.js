@@ -9,9 +9,9 @@ const auth = async (req, res, next) => {
     ) {
       const token = req.headers.authorization.split(" ")[1]
 
-      const {email} = jwt.verify(token, process.env.JWT__SECRET)
+      const {id} = jwt.verify(token, process.env.JWT__SECRET)
       
-      req.user = await User.findOne({ email })
+      req.user = await User.findById(id)
 
       next()
     }
