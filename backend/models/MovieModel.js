@@ -47,11 +47,16 @@ const movieSchema = new Schema(
       {
         user: { type: Schema.Types.ObjectId, require: true, ref: "User" },
         date: { type: Date, default: new Date() },
-        comments: { 
-          title:{type: String, default: null,require:true},
-          body:{type: String, default: null}
-         },
-        ratings: { type: Number, default: 5 },
+        comments: {
+          title: { type: String, default: null, require: true },
+          body: { type: String, default: null },
+        },
+      },
+    ],
+    ratings: [
+      {
+        userrating: { type: Number, default: 5 },
+        user: { type: Schema.Types.ObjectId, require: true, ref: "User" ,unique:true},
       },
     ],
   },
