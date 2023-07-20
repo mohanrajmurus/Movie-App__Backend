@@ -43,7 +43,7 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 })
 
-const findUser = asyncHandler(async (req, res) => {
+const findUserByEmail = asyncHandler(async (req, res) => {
   const { id } = req.params
   const user = await User.findOne({ email: id })
   if (user) {
@@ -54,6 +54,13 @@ const findUser = asyncHandler(async (req, res) => {
     return res
       .status(400)
       .send("Email not registred with us. Please Create Account")
+})
+
+const getAllUsers = asyncHandler(async(req,res) => {
+  const user = await User.find({}).select('name');
+  if(user){
+    return res.status(200).json(user)
+  }
 })
 const resetPassword = asyncHandler(async (req, res) => {
   const { id } = req.params
@@ -69,4 +76,4 @@ const generateJWTToken = (id) => {
   })
 }
 
-module.exports = { registerUser, loginUser, findUser, resetPassword }
+module.exports = { registerUser, loginUser, findUserByEmail, resetPassword ,getAllUsers}
