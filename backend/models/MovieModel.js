@@ -46,7 +46,7 @@ const movieSchema = new Schema(
     reviews: [
       {
         user: { type: Schema.Types.ObjectId, require: true, ref: "User" },
-        date: { type: Date, default: new Date() },
+        postedAt: { type: Date, default: new Date() },
         comments: {
           title: { type: String, default: null, require: true },
           body: { type: String, default: null },

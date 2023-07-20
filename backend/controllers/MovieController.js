@@ -43,9 +43,22 @@ const addMovieRatings = asyncHandler(async (req, res) => {
   const { id } = req.params
   const { userrating } = req.body
   const movie = await movieModel.findById(id)
-  movie.ratings.push({userrating,user:req.user._id})
+  movie.ratings.push({ userrating, user: req.user._id })
   await movie.save()
-  res.status(201).send('Rating Posted sucessfully')
+  res.status(201).send("Rating Posted sucessfully")
+})
+
+const addReviews = asyncHandler(async (req, res) => {
+  const {id} = req.params
+  const {comments} = req.body
+  const movie = await movieModel.findById(id)
+  movie.reviews.push({
+    user:req.user._id,
+    postedAt: new Date(),
+    comments
+  })
+  await movie.save()
+  res.status(201).send('posted sucessfully')
 })
 module.exports = {
   createMovieDetails,
@@ -53,4 +66,5 @@ module.exports = {
   getMovieById,
   deleteMovieById,
   addMovieRatings,
+  addReviews,
 }
