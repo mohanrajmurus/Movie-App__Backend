@@ -5,6 +5,8 @@ const {
   deleteMovieById,
   addMovieRatings,
   addReviews,
+  getMovieRatings,
+  getMovieReviews,
 } = require("../controllers/MovieController")
 const auth = require('../middleware/auth')
 const express = require("express")
@@ -21,6 +23,6 @@ router.get("/movie/:id",auth, getMovieById)
 router.post("/imgurl", generateImageURL)
 router.post("/videourl", generateVideoURL)
 router.delete("/movie/:id", deleteMovieById)
-router.post('/movie/:id/ratings',auth,addMovieRatings)
-router.post('/movie/:id/reviews',auth,addReviews)
+router.get('/movie/:id/ratings',auth,getMovieRatings)
+router.get('/movie/:id/reviews',auth,getMovieReviews)
 module.exports = router

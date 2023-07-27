@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
 const { Schema } = require("mongoose")
+
 const movieSchema = new Schema(
   {
     user: { type: mongoose.Schema.Types.ObjectId, require: true, ref: "User" },
@@ -42,27 +43,11 @@ const movieSchema = new Schema(
       type: String,
       default: null,
       require: [true, "A movie model has video URL"],
-    },
-    reviews: [
-      {
-        user: { type: Schema.Types.ObjectId, require: true, ref: "User" },
-        postedAt: { type: Date, default: new Date() },
-        comments: {
-          title: { type: String, default: null, require: true },
-          body: { type: String, default: null },
-        },
-      },
-    ],
-    ratings: [
-      {
-        userrating: { type: Number, default: 5 },
-        user: { type: Schema.Types.ObjectId, require: true, ref: "User"},
-      },
-    ],
+    }
   },
   { timestamps: true }
 )
 
-const movieModel = mongoose.model("movieModel", movieSchema)
+const Movie = mongoose.model("Movie", movieSchema)
 
-module.exports = movieModel
+module.exports = Movie
