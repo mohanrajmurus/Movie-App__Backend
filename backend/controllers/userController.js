@@ -69,7 +69,6 @@ const resetPassword = asyncHandler(async (req, res) => {
   await User.findByIdAndUpdate(id, { password: hashPassword })
   return res.status(200).send("password changed sucessfully")
 })
-
 const generateJWTToken = (id) => {
   return jwt.sign({ id }, process.env.JWT__SECRET, {
     expiresIn: "30d",
